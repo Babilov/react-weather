@@ -1,0 +1,26 @@
+.buttons_group {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 30%;
+  background: transparent;
+  border-top: 2px;
+  border-left: 0;
+  border-right: 0;
+  border-color: aliceblue;
+  color: aliceblue;
+}
+
+.btn:hover {
+  border-color:pink;
+  color: pink;
+}
+
+.selected{
+  border-color:pink;
+  color: pink;
+}
