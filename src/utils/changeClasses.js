@@ -1,27 +1,34 @@
-import $ from 'jquery';
-import cl from '../components/UI/MySelect/MySelect.module.css'
+const changeSelectClass = (
+  setDays,
+  city,
+  getJsonAndStatus,
+  getWeatherInforamationArray,
+  setWeather,
+  setActiveButton
+) => {
+  const handleClick = (event) => {
+    if (event.target.value === "1") setActiveButton([true, false, false]);
+    else if (event.target.value === "3") setActiveButton([false, true, false]);
+    else setActiveButton([false, false, true]);
+  };
 
-const changeSelectClass = (classList) => {
-    const targetClasses = classList[0];
-        if (targetClasses.includes('first')){
-            $('.first').addClass(`${cl.selected}`)
-            $('.second').removeClass(`${cl.selected}`)
-            $('.third').removeClass(`${cl.selected}`)
-        }
-        else{
-            if (targetClasses.includes('second')){
-                $('.second').addClass(`${cl.selected}`)
-                $('.first').removeClass(`${cl.selected}`)
-                $('.third').removeClass(`${cl.selected}`)
-            }
-            else{
-                if (targetClasses.includes('third')){
-                    $('.third').addClass(`${cl.selected}`)
-                    $('.first').removeClass(`${cl.selected}`)
-                    $('.second').removeClass(`${cl.selected}`)
-                }
-            }
-        }
-}
+  const changeSelect = async (event) => {
+    setDays(event.target.value);
+    handleClick(event);
+
+    if (city) {
+      const [myJson, isFullFilled] = await getJsonAndStatus(
+        city,
+        event.target.value
+      );
+
+      if (isFullFilled) {
+        const weatherInforamationArray = getWeatherInforamationArray(myJson);
+        setWeather(weatherInforamationArray);
+      }
+    }
+  };
+  return changeSelect;
+};
 
 export default changeSelectClass;

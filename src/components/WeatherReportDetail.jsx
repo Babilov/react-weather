@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 
 const WeatherReportDetail = () => {
 
-    const id = useParams().id
+    const {id} = useParams()
+    console.log(id)
 
     return (
         <div>
